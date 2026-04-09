@@ -11,7 +11,7 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-         try {
+        try {
             $categorias = Categoria::orderBy('id', 'desc')->get();
             return response()->json($categorias, 200);
         } catch (\Exception $e) {
