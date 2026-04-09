@@ -14,7 +14,7 @@ class ClienteController extends Controller
     public function index()
 {
     try {
-            $clientes = CLiente::orderBy('id', 'desc')->get();
+            $clientes = Cliente::orderBy('id', 'desc')->get();
             return response()->json($clientes, 200);
         } catch (\Exception $e) {
             return response()->json([
