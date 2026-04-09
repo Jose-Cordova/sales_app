@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+use App\Models\Categoria;
 
 class CategoriaController extends Controller
 {
@@ -28,17 +30,14 @@ class CategoriaController extends Controller
     {
         try {
             // Validamos que el nombre sea único y con restricciones
-            $request->validate([
-                'nombre' => [
-                    'required',
-                    'string',
-                    'min:2',
-                    'max:90',
-                    'unique:categorias,nombre'
+            $request->validate(
+                [
+                    'nombre' => 'required|string|min:2|max:80|unique:categorias,nombre'
+                ],
+                [
+                    'nombre.unique' => 'Ya existe una categoria con este nombre.'
                 ]
-            ], [
-                'nombre.unique' => 'Ya existe una categoría con ese nombre.'
-            ]);
+            );
 
             $categoria = Categoria::create([
                 'nombre' => $request->nombre
@@ -56,7 +55,8 @@ class CategoriaController extends Controller
 
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'Error interno en el servidor.'
+                'message' => 'Error interno en el servidor.',
+                'error' => $e->getMessage()
             ], 500);
         }
     }
