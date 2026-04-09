@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\CategoriaController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -10,3 +11,5 @@ Route::get('/user', function (Request $request) {
 
 //Ruta del contralador de producto
 Route::apiResource('productos', ProductoController::class);
+Route::apiResource('categorias', CategoriaController::class);
+
