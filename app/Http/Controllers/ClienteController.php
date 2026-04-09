@@ -13,14 +13,14 @@ class ClienteController extends Controller
      */
     public function index()
 {
-    $clientes = Cliente::all();
-
-    if ($clientes->isEmpty()) {
-        return response()->json([
-            'message' => 'No hay clientes registrados',
-            'data' => []
-        ], 200);
-    }
+    try {
+            $clientes = CLiente::orderBy('id', 'desc')->get();
+            return response()->json($clientes, 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Error al obtener los clientes.'
+            ], 500);
+        }
 }
 
     /**

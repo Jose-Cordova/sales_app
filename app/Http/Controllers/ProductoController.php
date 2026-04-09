@@ -67,8 +67,7 @@ class ProductoController extends Controller
             ], 201);
 
         } catch (\Exception $e) {
-            Log::error('Error en ProductoController@store: ' . $e->getMessage());
-
+            
             return response()->json([
                 'message' => 'Error al crear el producto.'
             ], 500);
