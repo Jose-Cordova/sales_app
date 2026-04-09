@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cliente;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Validator;
 
 class ClienteController extends Controller
@@ -14,7 +15,7 @@ class ClienteController extends Controller
     public function index()
 {
     try {
-            $clientes = CLiente::orderBy('id', 'desc')->get();
+            $clientes = Cliente::orderBy('id', 'desc')->get();
             return response()->json($clientes, 200);
         } catch (\Exception $e) {
             return response()->json([
